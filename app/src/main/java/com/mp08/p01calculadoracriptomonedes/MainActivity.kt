@@ -8,11 +8,24 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var display: TextView
+    private lateinit var value: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         display = findViewById<TextView>(R.id.TVResult)
+        setValue("0")
         addEvents()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("value", value)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        setValue(savedInstanceState.getString("value").toString())
+        showValue()
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     private fun addEvents() {
@@ -20,23 +33,43 @@ class MainActivity : AppCompatActivity() {
             val id = resources.getIdentifier("BtnNum$i", "id", packageName)
             val btn = findViewById<View>(id)
             btn.setOnClickListener {
-                if (display.text == "0") {
-                    display.text = i.toString()
+                if (value == "0") {
+                    setValue(i.toString())
                 } else {
-                    display.text = display.text.toString().plus(i)
+                    addValue(i.toString())
                 }
             }
         }
         findViewById<View>(R.id.BtnCE).setOnClickListener() {
-            display.text = ""
+            setValue("0")
         }
         findViewById<View>(R.id.BtnDEL).setOnClickListener() {
-            display.text = display.text.toString().dropLast(1)
+            deleteLast()
         }
         findViewById<View>(R.id.BtnComa).setOnClickListener() {
-            if (!display.text.toString().contains(",") && display.text.toString().isNotEmpty()) {
-                display.text = display.text.toString().plus(",")
+            if (!value.contains(",") && value != "") {
+                addValue(",")
             }
         }
     }
+
+    private fun showValue() {
+        display.text = value.replace(".", ",")
+    }
+
+    private fun setValue(value: String) {
+        this.value = value
+        showValue()
+    }
+
+    private fun addValue(value: String) {
+        this.value = this.value.plus(value)
+        showValue()
+    }
+
+    private fun deleteLast() {
+        this.value = this.value.dropLast(1)
+        showValue()
+    }
+
 }
