@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">P01 Calculadora criptomonedes</string>
+    <string name="_Number9">9</string>
+    <string name="_Number8">8</string>
+    <string name="_Number7">7</string>
+    <string name="_Number6">6</string>
+    <string name="_Number5">5</string>
+    <string name="_Number4">4</string>
+    <string name="_Number3">3</string>
+    <string name="_Number2">2</string>
+    <string name="_Number1">1</string>
+    <string name="_Number0">0</string>
+    <string name="_CE">CE</string>
+    <string name="_Coma">,</string>
+    <string name="_Delete">⌫</string>
+    <string name="_Currency">Currency</string>
 </resources>
