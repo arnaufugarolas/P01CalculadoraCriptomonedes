@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var display: TextView
     private lateinit var value: String
+    private var currencies = mapOf("Bitcoin BTC" to null,"Cardano ADA" to null, "Ethereum ETH" to null, "LiteCoin LTC" to null)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,6 +54,19 @@ class MainActivity : AppCompatActivity() {
                 addValue(",")
             }
         }
+
+        findViewById<View>(R.id.BtnCurrency).setOnClickListener(
+            View.OnClickListener {
+                val dialog = MaterialAlertDialogBuilder(this)
+                dialog.setTitle("Selecciona una moneda")
+                val currencies = arrayOf("Dólar", "Euro", "Libra", "Yen", "Bitcoin")
+                dialog.setItems(currencies) { _, which ->
+                    Snackbar.make(it, "Has seleccionado ${currencies[which]}", Snackbar.LENGTH_SHORT).show()
+                }
+                dialog.show()
+            }
+        )
+
     }
 
     private fun showValue() {
@@ -71,5 +87,33 @@ class MainActivity : AppCompatActivity() {
         this.value = this.value.dropLast(1)
         showValue()
     }
+
+    fun dialogMultiChoose(view: View) {
+        val multiItems = arrayOf("Blau", "Vermell", "Lila")
+        val checkedItems = booleanArrayOf(true, false, true)
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Título del dialogo")
+            .setNeutralButton("Cancel") { dialog, ci ->
+                // Respond to neutral button press
+            }
+            .setPositiveButton("Ok") { dialog, ci ->
+                var st: String = ""
+
+                checkedItems.forEach {
+                    st = st + " " + it.toString()
+                }
+
+                var sValores: String = checkedItems.toString()
+                Snackbar.make(view, "OK $st", Snackbar.LENGTH_SHORT).show();
+            }
+            //Multi-choice items (initialized with checked items)
+            .setMultiChoiceItems(multiItems, checkedItems) { dialog, which, checked ->
+                // Respond to item chosen
+            }
+
+            .show()
+    }
+
 
 }
