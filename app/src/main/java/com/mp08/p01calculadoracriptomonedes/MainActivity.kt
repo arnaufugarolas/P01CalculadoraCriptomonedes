@@ -2,20 +2,24 @@ package com.mp08.p01calculadoracriptomonedes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import java.util.Currency
 
 class MainActivity : AppCompatActivity() {
     private lateinit var display: TextView
     private lateinit var value: String
-    private var currencies = mapOf("Bitcoin BTC" to null,"Cardano ADA" to null, "Ethereum ETH" to null, "LiteCoin LTC" to null)
+    private var currencies = mapOf("BTC" to null, "ADA" to null, "ETH" to null, "LTC" to null)
+    private var selectedCurrency = "Currency"
+    private lateinit var btnCurrency: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         display = findViewById<TextView>(R.id.TVResult)
+        btnCurrency = findViewById<Button>(R.id.BtnCurrency)
         setValue("0")
         addEvents()
     }
@@ -55,17 +59,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<View>(R.id.BtnCurrency).setOnClickListener(
-            View.OnClickListener {
-                val dialog = MaterialAlertDialogBuilder(this)
-                dialog.setTitle("Selecciona una moneda")
-                val currencies = arrayOf("Dólar", "Euro", "Libra", "Yen", "Bitcoin")
-                dialog.setItems(currencies) { _, which ->
-                    Snackbar.make(it, "Has seleccionado ${currencies[which]}", Snackbar.LENGTH_SHORT).show()
-                }
-                dialog.show()
-            }
-        )
+        findViewById<View>(R.id.BtnCurrency).setOnClickListener() {
+            btnCurrencyClick(findViewById(R.id.BtnCurrency))
+        }
 
     }
 
@@ -84,36 +80,43 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun deleteLast() {
-        this.value = this.value.dropLast(1)
+        value = if (value.length > 1) {
+            value.substring(0, value.length - 1)
+        } else {
+            "0"
+        }
         showValue()
     }
 
-    fun dialogMultiChoose(view: View) {
-        val multiItems = arrayOf("Blau", "Vermell", "Lila")
-        val checkedItems = booleanArrayOf(true, false, true)
+    private fun btnCurrencyClick (view: View) {
+        val dialog = MaterialAlertDialogBuilder(this)
+        dialog.setTitle("Selecciona una moneda")
+        val items = arrayOf(getString(R.string._Currency), "Add Crypto")
+        val currencies = currencies.keys.toTypedArray().plus(items)
+        dialog.setItems(currencies) { _, which ->
+            changeCurrency(currencies[which], view)
+        }
 
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Título del dialogo")
-            .setNeutralButton("Cancel") { dialog, ci ->
-                // Respond to neutral button press
-            }
-            .setPositiveButton("Ok") { dialog, ci ->
-                var st: String = ""
-
-                checkedItems.forEach {
-                    st = st + " " + it.toString()
-                }
-
-                var sValores: String = checkedItems.toString()
-                Snackbar.make(view, "OK $st", Snackbar.LENGTH_SHORT).show();
-            }
-            //Multi-choice items (initialized with checked items)
-            .setMultiChoiceItems(multiItems, checkedItems) { dialog, which, checked ->
-                // Respond to item chosen
-            }
-
-            .show()
+        dialog.show()
     }
 
+    private fun changeCurrency(currency: String, view: View) {
+        if (currency == getString(R.string._Currency)) {
+            Snackbar.make(view, "Selecciona una moneda", Snackbar.LENGTH_SHORT).show()
+        } else if (currency == "Add Crypto") {
+            addCrypto()
+        } else {
+            Snackbar.make(view, "Has seleccionado $currency", Snackbar.LENGTH_SHORT).show()
+            btnCurrency.text = currency
+        }
+    }
+
+    private fun addCrypto() {
+        val dialog = MaterialAlertDialogBuilder(this)
+        dialog.setTitle("Añade una moneda")
+
+
+        dialog.show()
+    }
 
 }
