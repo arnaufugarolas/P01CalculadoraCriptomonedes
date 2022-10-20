@@ -6,17 +6,6 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/ETName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:hint="Name"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
-
-    <EditText
         android:id="@+id/ETValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

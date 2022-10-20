@@ -2,6 +2,7 @@ package com.mp08.p01calculadoracriptomonedes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -9,30 +10,59 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import java.util.Currency
 
-class MainActivity : AppCompatActivity() {
+interface AddValueToCryptoInterface {
+    fun addValueToCryptoGetData(name: String?, value: String?)
+}
+interface AddCryptoInterface {
+    fun addCryptoGetData(name: String?, value: String?)
+}
+
+class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoInterface {
     private lateinit var display: TextView
-    private lateinit var value: String
-    private var currencies = mapOf("BTC" to null, "ADA" to null, "ETH" to null, "LTC" to null)
-    private var selectedCurrency = "Currency"
     private lateinit var btnCurrency: Button
+    private lateinit var value: String
+    private lateinit var stableCurrency: String
+    private lateinit var currencies: Map<String, Double?>
+    private lateinit var currenciesNames: Array<String>
+    private lateinit var currenciesValues: Array<String>
+    private lateinit var currentCurrency: String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        display = findViewById<TextView>(R.id.TVResult)
-        btnCurrency = findViewById<Button>(R.id.BtnCurrency)
-        setValue("0")
-        addEvents()
+        init()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString("value", value)
+        outState.putStringArray("currenciesNames", currenciesNames)
+        outState.putStringArray("currenciesValues", currenciesValues)
+        outState.putString("currentCurrency", currentCurrency)
+
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         setValue(savedInstanceState.getString("value").toString())
+        currenciesNames = savedInstanceState.getStringArray("currenciesNames")!!
+        currenciesValues = savedInstanceState.getStringArray("currenciesValues")!!
+        currentCurrency = savedInstanceState.getString("currentCurrency").toString()
+        btnCurrency.text = currentCurrency
+
         showValue()
         super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    private fun init() {
+        display = findViewById<TextView>(R.id.TVResult)
+        btnCurrency = findViewById<Button>(R.id.BtnCurrency)
+        stableCurrency = getString(R.string._Currency).toString()
+        currenciesNames = arrayOf(stableCurrency, "BTC", "ADA", "ETH", "LTC")
+        currenciesValues = arrayOf("1", "null", "null", "null", "null")
+        currentCurrency = stableCurrency
+        addEvents()
+        setValue("0")
     }
 
     private fun addEvents() {
@@ -90,33 +120,59 @@ class MainActivity : AppCompatActivity() {
 
     private fun btnCurrencyClick (view: View) {
         val dialog = MaterialAlertDialogBuilder(this)
-        dialog.setTitle("Selecciona una moneda")
-        val items = arrayOf(getString(R.string._Currency), "Add Crypto")
-        val currencies = currencies.keys.toTypedArray().plus(items)
-        dialog.setItems(currencies) { _, which ->
-            changeCurrency(currencies[which], view)
+        val items = currenciesNames.plus("Add new currency")
+
+        dialog.setTitle("Select a currency")
+        dialog.setItems(items) { _, which ->
+            if (which == items.size - 1) addNewCrypto()
+            else changeCurrency(items[which])
         }
 
         dialog.show()
     }
 
-    private fun changeCurrency(currency: String, view: View) {
-        if (currency == getString(R.string._Currency)) {
-            Snackbar.make(view, "Selecciona una moneda", Snackbar.LENGTH_SHORT).show()
-        } else if (currency == "Add Crypto") {
-            addCrypto()
+    private fun addNewCrypto() {
+        val addCryptoDialog = AddCryptoDialog()
+        addCryptoDialog.show(supportFragmentManager, "AddCryptoDialog")
+    }
+
+    private fun changeCurrency(name: String) {
+        val currencyIndex = currenciesNames.indexOf(name)
+        if (currencyIndex == -1) {
+            Snackbar.make(findViewById(R.id.BtnCurrency), "This currency is not available", Snackbar.LENGTH_SHORT).show()
+        } else if (currenciesValues[currencyIndex] == "null") {
+            changeCryptoValue(name)
         } else {
-            Snackbar.make(view, "Has seleccionado $currency", Snackbar.LENGTH_SHORT).show()
-            btnCurrency.text = currency
+            // Convert currency
+            currentCurrency = name
+            btnCurrency.text = currentCurrency
         }
     }
 
-    private fun addCrypto() {
-        val dialog = MaterialAlertDialogBuilder(this)
-        dialog.setTitle("Añade una moneda")
+    private fun changeCryptoValue(name: String) {
+        val addValueToCryptoDialog = AddValueToCrypto(name)
+        addValueToCryptoDialog.show(supportFragmentManager, "AddValueToCryptoDialog")
+    }
 
+    override fun addCryptoGetData(name: String?, value: String?) {
+        if (name != null && value != null) {
+            currenciesNames = currenciesNames.plus(name)
+            currenciesValues = currenciesValues.plus(value)
 
-        dialog.show()
+            Snackbar.make(findViewById(R.id.BtnCurrency), "Currency added", Snackbar.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(findViewById(R.id.BtnCurrency), "Error adding currency", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun addValueToCryptoGetData(name: String?, value: String?) {
+        if (name != null && value != null) {
+            currenciesValues[currenciesNames.indexOf(name)] = value
+
+            Snackbar.make(findViewById(R.id.BtnCurrency), "Value added", Snackbar.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(findViewById(R.id.BtnCurrency), "Error adding value", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
 }
