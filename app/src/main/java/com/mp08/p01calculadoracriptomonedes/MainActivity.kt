@@ -2,13 +2,11 @@ package com.mp08.p01calculadoracriptomonedes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import java.util.Currency
 
 interface AddValueToCryptoInterface {
     fun addValueToCryptoGetData(name: String?, value: String?)
@@ -22,7 +20,6 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
     private lateinit var btnCurrency: Button
     private lateinit var value: String
     private lateinit var stableCurrency: String
-    private lateinit var currencies: Map<String, Double?>
     private lateinit var currenciesNames: Array<String>
     private lateinit var currenciesValues: Array<String>
     private lateinit var currentCurrency: String
@@ -84,48 +81,75 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
             deleteLast()
         }
         findViewById<View>(R.id.BtnComa).setOnClickListener() {
-            if (!value.contains(",") && value != "") {
-                addValue(",")
+            if (!value.contains(".")) {
+                addValue(".")
             }
         }
 
-        findViewById<View>(R.id.BtnCurrency).setOnClickListener() {
-            btnCurrencyClick(findViewById(R.id.BtnCurrency))
+        btnCurrency.setOnClickListener() {
+            btnCurrencyClick()
         }
 
+        btnCurrency.setOnLongClickListener() {
+            btnCurrencyLongClick()
+            true
+        }
     }
 
     private fun showValue() {
         display.text = value.replace(".", ",")
     }
 
-    private fun setValue(value: String) {
-        this.value = value
+    private fun setValue(newValue: String) {
+        if (newValue.contains(".")) {
+            if (newValue.split(".").size == 2 && newValue.split(".")[1] == "0") {
+                value = newValue.split(".")[0]
+            } else {
+                value = newValue
+            }
+        } else {
+            value = newValue
+        }
+
         showValue()
     }
 
-    private fun addValue(value: String) {
-        this.value = this.value.plus(value)
+    private fun addValue(newValue: String) {
+        if (value.split(".").size == 2 && value.split(".")[1].length == 8) {
+            return
+        }
+        value = value.plus(newValue)
         showValue()
     }
 
     private fun deleteLast() {
-        value = if (value.length > 1) {
-            value.substring(0, value.length - 1)
-        } else {
-            "0"
+        value = when {
+            value.length > 1 -> value.substring(0, value.length - 1)
+            else -> "0"
         }
         showValue()
     }
 
-    private fun btnCurrencyClick (view: View) {
+    private fun btnCurrencyClick () {
         val dialog = MaterialAlertDialogBuilder(this)
         val items = currenciesNames.plus("Add new currency")
 
-        dialog.setTitle("Select a currency")
+        dialog.setTitle("Exchange")
         dialog.setItems(items) { _, which ->
             if (which == items.size - 1) addNewCrypto()
             else changeCurrency(items[which])
+        }
+
+        dialog.show()
+    }
+
+    private fun btnCurrencyLongClick (){
+        val dialog = MaterialAlertDialogBuilder(this)
+        val currencies = currenciesNames.drop(currenciesNames.indexOf(stableCurrency) + 1).toTypedArray()
+
+        dialog.setTitle("Set prices")
+        dialog.setItems(currencies) { _, which ->
+            changeCryptoValue(currencies[which])
         }
 
         dialog.show()
@@ -143,10 +167,20 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
         } else if (currenciesValues[currencyIndex] == "null") {
             changeCryptoValue(name)
         } else {
-            // Convert currency
-            currentCurrency = name
-            btnCurrency.text = currentCurrency
+            exchangeCryptoValue(name)
         }
+    }
+
+    private fun exchangeCryptoValue(name: String) {
+        if (currentCurrency == name) return
+        else if (name == stableCurrency) {
+            setValue((value.toDouble() * currenciesValues[currenciesNames.indexOf(currentCurrency)].toDouble()).toString())
+        } else {
+            setValue((value.toDouble() * currenciesValues[currenciesNames.indexOf(currentCurrency)].toDouble()).toString())
+            setValue((value.toDouble() / currenciesValues[currenciesNames.indexOf(name)].toDouble()).toString())
+        }
+        currentCurrency = name
+        btnCurrency.text = name
     }
 
     private fun changeCryptoValue(name: String) {
@@ -169,9 +203,9 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
         if (name != null && value != null) {
             currenciesValues[currenciesNames.indexOf(name)] = value
 
-            Snackbar.make(findViewById(R.id.BtnCurrency), "Value added", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(findViewById(R.id.BtnCurrency), "Value changed", Snackbar.LENGTH_SHORT).show()
         } else {
-            Snackbar.make(findViewById(R.id.BtnCurrency), "Error adding value", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(findViewById(R.id.BtnCurrency), "Error changing value", Snackbar.LENGTH_SHORT).show()
         }
     }
 

@@ -28,6 +28,10 @@ class AddValueToCrypto(Currency: String) : DialogFragment() {
             this.dismiss()
         }
 
+        btnCancel.setOnClickListener{
+            this.dismiss()
+        }
+
         return view
     }
 

@@ -27,6 +27,10 @@ class AddCryptoDialog: DialogFragment() {
             this.dismiss()
         }
 
+        btnCancel.setOnClickListener{
+            this.dismiss()
+        }
+
         return view
     }
 
