@@ -101,15 +101,13 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
     }
 
     private fun setValue(newValue: String) {
-        if (newValue.contains(".")) {
-            if (newValue.split(".").size == 2 && newValue.split(".")[1] == "0") {
-                value = newValue.split(".")[0]
-            } else {
-                value = newValue
-            }
-        } else {
-            value = newValue
-        }
+        value = if (newValue.contains(".")) {
+            val parts = newValue.split(".")
+
+            if (parts[1].length > 8) "${parts[0]}.${parts[1].substring(0, 8)}"
+            else if (parts[1] == "0") parts[0]
+            else newValue
+        } else newValue
 
         showValue()
     }
@@ -137,7 +135,7 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
         dialog.setTitle("Exchange")
         dialog.setItems(items) { _, which ->
             if (which == items.size - 1) addNewCrypto()
-            else changeCurrency(items[which])
+            else exchangeCurrency(items[which])
         }
 
         dialog.show()
@@ -160,7 +158,7 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
         addCryptoDialog.show(supportFragmentManager, "AddCryptoDialog")
     }
 
-    private fun changeCurrency(name: String) {
+    private fun exchangeCurrency(name: String) {
         val currencyIndex = currenciesNames.indexOf(name)
         if (currencyIndex == -1) {
             Snackbar.make(findViewById(R.id.BtnCurrency), "This currency is not available", Snackbar.LENGTH_SHORT).show()
@@ -201,9 +199,14 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
 
     override fun addValueToCryptoGetData(name: String?, value: String?) {
         if (name != null && value != null) {
-            currenciesValues[currenciesNames.indexOf(name)] = value
-
-            Snackbar.make(findViewById(R.id.BtnCurrency), "Value changed", Snackbar.LENGTH_SHORT).show()
+            if (currenciesValues[currenciesNames.indexOf(name)] == "null") {
+                currenciesValues[currenciesNames.indexOf(name)] = value
+                Snackbar.make(findViewById(R.id.BtnCurrency), "Currency value added", Snackbar.LENGTH_SHORT).show()
+                exchangeCurrency(name)
+            } else {
+                currenciesValues[currenciesNames.indexOf(name)] = value
+                Snackbar.make(findViewById(R.id.BtnCurrency), "Currency value changed", Snackbar.LENGTH_SHORT).show()
+            }
         } else {
             Snackbar.make(findViewById(R.id.BtnCurrency), "Error changing value", Snackbar.LENGTH_SHORT).show()
         }
