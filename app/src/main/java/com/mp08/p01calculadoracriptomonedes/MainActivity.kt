@@ -1,40 +1,39 @@
 package com.mp08.p01calculadoracriptomonedes
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-interface AddValueToCryptoInterface {
-    fun addValueToCryptoGetData(name: String?, value: String?)
-}
-interface AddCryptoInterface {
-    fun addCryptoGetData(name: String?, value: String?)
+interface CryptoDetailsInterface {
+    fun createCrypto(name: String, value: String)
+    fun modifyCrypto(name: String, value: String)
 }
 
-class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoInterface {
+class MainActivity : AppCompatActivity(), CryptoDetailsInterface {
     private lateinit var display: TextView
     private lateinit var btnCurrency: Button
     private lateinit var value: String
     private lateinit var stableCurrency: String
-    private lateinit var currenciesNames: Array<String>
-    private lateinit var currenciesValues: Array<String>
+    private lateinit var currenciesNames: ArrayList<String>
+    private lateinit var currenciesValues: ArrayList<String>
     private lateinit var currentCurrency: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
         init()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString("value", value)
-        outState.putStringArray("currenciesNames", currenciesNames)
-        outState.putStringArray("currenciesValues", currenciesValues)
+        outState.putStringArrayList("currenciesNames", currenciesNames)
+        outState.putStringArrayList("currenciesValues", currenciesValues)
         outState.putString("currentCurrency", currentCurrency)
 
         super.onSaveInstanceState(outState)
@@ -42,29 +41,30 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         setValue(savedInstanceState.getString("value").toString())
-        currenciesNames = savedInstanceState.getStringArray("currenciesNames")!!
-        currenciesValues = savedInstanceState.getStringArray("currenciesValues")!!
+        currenciesNames = savedInstanceState.getStringArrayList("currenciesNames")!!
+        currenciesValues = savedInstanceState.getStringArrayList("currenciesValues")!!
         currentCurrency = savedInstanceState.getString("currentCurrency").toString()
         btnCurrency.text = currentCurrency
 
-        showValue()
+        showValueOnDisplay()
         super.onRestoreInstanceState(savedInstanceState)
     }
 
     private fun init() {
-        display = findViewById<TextView>(R.id.TVResult)
-        btnCurrency = findViewById<Button>(R.id.BtnCurrency)
-        stableCurrency = getString(R.string._Currency).toString()
-        currenciesNames = arrayOf(stableCurrency, "BTC", "ADA", "ETH", "LTC")
-        currenciesValues = arrayOf("1", "null", "null", "null", "null")
+        display = findViewById(R.id.TVResult)
+        btnCurrency = findViewById(R.id.ButtonCurrency)
+        stableCurrency = getString(R.string.StableCurrency)
+        currenciesNames = arrayListOf(stableCurrency, "BTC", "ADA", "ETH", "LTC")
+        currenciesValues = arrayListOf("1", "null", "null", "null", "null")
         currentCurrency = stableCurrency
+
         addEvents()
         setValue("0")
     }
 
     private fun addEvents() {
         for (i in 0..9) {
-            val id = resources.getIdentifier("BtnNum$i", "id", packageName)
+            val id = resources.getIdentifier("ButtonNumber$i", "id", packageName)
             val btn = findViewById<View>(id)
             btn.setOnClickListener {
                 if (value == "0") {
@@ -74,29 +74,27 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
                 }
             }
         }
-        findViewById<View>(R.id.BtnCE).setOnClickListener() {
+        findViewById<View>(R.id.ButtonCE).setOnClickListener {
             setValue("0")
         }
-        findViewById<View>(R.id.BtnDEL).setOnClickListener() {
-            deleteLast()
+        findViewById<View>(R.id.ButtonDeleteLast).setOnClickListener {
+            deleteLastCharacterOfValue()
         }
-        findViewById<View>(R.id.BtnComa).setOnClickListener() {
+        findViewById<View>(R.id.BtnComa).setOnClickListener {
             if (!value.contains(".")) {
                 addValue(".")
             }
         }
-
-        btnCurrency.setOnClickListener() {
-            btnCurrencyClick()
+        btnCurrency.setOnClickListener {
+            currencyButtonClickHandler()
         }
-
-        btnCurrency.setOnLongClickListener() {
-            btnCurrencyLongClick()
+        btnCurrency.setOnLongClickListener {
+            currencyButtonLongClickHandler()
             true
         }
     }
 
-    private fun showValue() {
+    private fun showValueOnDisplay() {
         display.text = value.replace(".", ",")
     }
 
@@ -104,12 +102,14 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
         value = if (newValue.contains(".")) {
             val parts = newValue.split(".")
 
-            if (parts[1].length > 8) "${parts[0]}.${parts[1].substring(0, 8)}"
-            else if (parts[1] == "0") parts[0]
+            if (parts[1].length > 8) {
+                "%.8f".format(newValue.toDouble())
+            }
+            else if (parts[1].matches("^0+$".toRegex())) parts[0]
             else newValue
         } else newValue
 
-        showValue()
+        showValueOnDisplay()
     }
 
     private fun addValue(newValue: String) {
@@ -117,99 +117,126 @@ class MainActivity : AppCompatActivity(), AddCryptoInterface, AddValueToCryptoIn
             return
         }
         value = value.plus(newValue)
-        showValue()
+        showValueOnDisplay()
     }
 
-    private fun deleteLast() {
+    private fun deleteLastCharacterOfValue() {
         value = when {
             value.length > 1 -> value.substring(0, value.length - 1)
             else -> "0"
         }
-        showValue()
+        showValueOnDisplay()
     }
 
-    private fun btnCurrencyClick () {
+    private fun currencyButtonClickHandler() {
         val dialog = MaterialAlertDialogBuilder(this)
-        val items = currenciesNames.plus("Add new currency")
+        dialog.setTitle(getString(R.string.TitleExchange))
 
-        dialog.setTitle("Exchange")
-        dialog.setItems(items) { _, which ->
-            if (which == items.size - 1) addNewCrypto()
-            else exchangeCurrency(items[which])
+        val items = arrayListOf<String>()
+        items.addAll(currenciesNames)
+        items.remove(currentCurrency)
+        items.add(getString(R.string.AddCurrency))
+
+        dialog.setItems(items.toTypedArray()) { _, which ->
+            if (which == items.size - 1) createCurrencyDialog()
+            else exchangeValue(items[which])
         }
 
         dialog.show()
     }
 
-    private fun btnCurrencyLongClick (){
-        val dialog = MaterialAlertDialogBuilder(this)
-        val currencies = currenciesNames.drop(currenciesNames.indexOf(stableCurrency) + 1).toTypedArray()
-
-        dialog.setTitle("Set prices")
-        dialog.setItems(currencies) { _, which ->
-            changeCryptoValue(currencies[which])
-        }
-
-        dialog.show()
+    private fun createCurrencyDialog() {
+        val createCryptoDialog = CryptoDetailsDialog("null", "null")
+        createCryptoDialog.show(supportFragmentManager, "AddCryptoDialog")
     }
 
-    private fun addNewCrypto() {
-        val addCryptoDialog = AddCryptoDialog()
-        addCryptoDialog.show(supportFragmentManager, "AddCryptoDialog")
-    }
-
-    private fun exchangeCurrency(name: String) {
-        val currencyIndex = currenciesNames.indexOf(name)
-        if (currencyIndex == -1) {
-            Snackbar.make(findViewById(R.id.BtnCurrency), "This currency is not available", Snackbar.LENGTH_SHORT).show()
-        } else if (currenciesValues[currencyIndex] == "null") {
-            changeCryptoValue(name)
+    private fun exchangeValue(name: String) {
+        if (currenciesValues[currenciesNames.indexOf(name)] == "null") {
+            modifyCurrencyDialog(name)
         } else {
-            exchangeCryptoValue(name)
-        }
-    }
+            val currentCurrencyRate =
+                currenciesValues[currenciesNames.indexOf(currentCurrency)].toDouble()
+            val newCurrencyRate = currenciesValues[currenciesNames.indexOf(name)].toDouble()
+            val currentValue = value.toDouble()
 
-    private fun exchangeCryptoValue(name: String) {
-        if (currentCurrency == name) return
-        else if (name == stableCurrency) {
-            setValue((value.toDouble() * currenciesValues[currenciesNames.indexOf(currentCurrency)].toDouble()).toString())
-        } else {
-            setValue((value.toDouble() * currenciesValues[currenciesNames.indexOf(currentCurrency)].toDouble()).toString())
-            setValue((value.toDouble() / currenciesValues[currenciesNames.indexOf(name)].toDouble()).toString())
-        }
-        currentCurrency = name
-        btnCurrency.text = name
-    }
-
-    private fun changeCryptoValue(name: String) {
-        val addValueToCryptoDialog = AddValueToCrypto(name)
-        addValueToCryptoDialog.show(supportFragmentManager, "AddValueToCryptoDialog")
-    }
-
-    override fun addCryptoGetData(name: String?, value: String?) {
-        if (name != null && value != null) {
-            currenciesNames = currenciesNames.plus(name)
-            currenciesValues = currenciesValues.plus(value)
-
-            Snackbar.make(findViewById(R.id.BtnCurrency), "Currency added", Snackbar.LENGTH_SHORT).show()
-        } else {
-            Snackbar.make(findViewById(R.id.BtnCurrency), "Error adding currency", Snackbar.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun addValueToCryptoGetData(name: String?, value: String?) {
-        if (name != null && value != null) {
-            if (currenciesValues[currenciesNames.indexOf(name)] == "null") {
-                currenciesValues[currenciesNames.indexOf(name)] = value
-                Snackbar.make(findViewById(R.id.BtnCurrency), "Currency value added", Snackbar.LENGTH_SHORT).show()
-                exchangeCurrency(name)
+            if (name == stableCurrency) {
+                setValue((currentValue * currentCurrencyRate).toString())
             } else {
-                currenciesValues[currenciesNames.indexOf(name)] = value
-                Snackbar.make(findViewById(R.id.BtnCurrency), "Currency value changed", Snackbar.LENGTH_SHORT).show()
+                setValue((currentValue * currentCurrencyRate).toString())
+                setValue((currentValue / newCurrencyRate).toString())
             }
-        } else {
-            Snackbar.make(findViewById(R.id.BtnCurrency), "Error changing value", Snackbar.LENGTH_SHORT).show()
+            currentCurrency = name
+            btnCurrency.text = name
         }
     }
 
+    private fun currencyButtonLongClickHandler() {
+        val dialog = MaterialAlertDialogBuilder(this)
+        dialog.setTitle(R.string.TitleChangeRate)
+
+        val items = arrayListOf<String>()
+        items.addAll(currenciesNames)
+        items.remove(stableCurrency)
+
+        dialog.setItems(items.toTypedArray()) { _, which ->
+            modifyCurrencyDialog(items[which])
+        }
+
+        dialog.show()
+    }
+
+    private fun modifyCurrencyDialog(name: String) {
+        val modifyCryptoDialog =
+            CryptoDetailsDialog(name, currenciesValues[currenciesNames.indexOf(name)])
+        modifyCryptoDialog.show(supportFragmentManager, "AddValueToCryptoDialog")
+    }
+
+    override fun createCrypto(name: String, value: String) {
+        if (name == "null") {
+            Snackbar.make(
+                findViewById(R.id.ButtonCurrency),
+                getString(R.string.EmptyName),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        } else if (currenciesNames.contains(name)) {
+            Snackbar.make(
+                findViewById(R.id.ButtonCurrency),
+                getString(R.string.CryptoAlreadyExists),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        } else {
+            currenciesNames.add(name)
+            currenciesValues.add(value)
+            Snackbar.make(
+                findViewById(R.id.ButtonCurrency),
+                getString(R.string.CryptoAdded),
+                Snackbar.LENGTH_SHORT
+            ).show()
+            exchangeValue(name)
+        }
+    }
+
+    override fun modifyCrypto(name: String, value: String) {
+        if (name == "null") {
+            Snackbar.make(
+                findViewById(R.id.ButtonCurrency),
+                getString(R.string.EmptyName),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        } else if (!currenciesNames.contains(name)) {
+            Snackbar.make(
+                findViewById(R.id.ButtonCurrency),
+                getString(R.string.CryptoDoesntExist),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        } else {
+            currenciesValues[currenciesNames.indexOf(name)] = value
+            Snackbar.make(
+                findViewById(R.id.ButtonCurrency),
+                getString(R.string.CryptoModified),
+                Snackbar.LENGTH_SHORT
+            ).show()
+            exchangeValue(name)
+        }
+    }
 }

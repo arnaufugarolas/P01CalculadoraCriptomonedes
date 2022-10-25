@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="RubineRed" hex="ca2e55" r="202" g="46" b="85">#ca2e55</color>
+    <color name="EerieBlack" hex="252627" r="37" g="38" b="39">#252627</color>
+    <color name="Linen" hex="f9ebe0" r="249" g="235" b="224">#f9ebe0</color>
+    <color name="BlueMunsell" hex="208aae" r="32" g="138" b="174">#208aae</color>
+    <color name="OxfordBlue" hex="0d2149" r="13" g="33" b="73">#0d2149</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

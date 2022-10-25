@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">P01 Calcolatore di criptovalute</string>
-    <string name="_Currency">EUR</string>
+    <string name="StableCurrency">EUR</string>
+    <string name="AddCurrency">Aggiungere una nuova valuta</string>
+    <string name="TitleExchange">Cambio di valuta</string>
+    <string name="TitleChangeRate">Impostare la quotazione della valuta</string>
+    <string name="CryptoAlreadyExists">Questa valuta esiste già</string>
+    <string name="EmptyName">Devi dare un nome alla valuta</string>
+    <string name="CryptoAdded">La valuta è stata aggiunta correttamente</string>
+    <string name="CryptoDoesntExist">La valuta non esiste</string>
+    <string name="CryptoModified">La valuta è stata modificata</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
 </resources>
