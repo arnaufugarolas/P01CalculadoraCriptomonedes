@@ -5,11 +5,21 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
-        <item name="android:layout_margin">5dp</item>
-        <item name="android:gravity">center_vertical|center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minLines">1</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">@color/Linen</item>
         <item name="android:backgroundTint">@color/OxfordBlue</item>
     </style>
+
+    <style name="ButtonCancelDialog" parent="ButtonBorderLess">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:text">@string/cancel</item>
+        <item name="android:textColor">@color/Linen</item>
+    </style>
+
     <style name="TextView" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
@@ -17,5 +27,29 @@
         <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/Linen</item>
         <item name="android:background">@color/EerieBlack</item>
+    </style>
+
+    <style name="TextViewTitleDialog" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:text">@string/set_the_new_currency_details</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/Linen</item>
+    </style>
+
+    <style name="CryptoDetailsDialog" parent="LinearLayoutMWV">
+        <item name="android:background">@color/EerieBlack</item>
+    </style>
+
+    <style name="EditTextDialog" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:importantForAutofill">no</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:textColor">@color/Linen</item>
+        <item name="android:textColorHint">@color/Linen60</item>
     </style>
 </resources>
