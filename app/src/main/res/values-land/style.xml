@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ButtonCE" parent="ButtonPadPortrait">
+    <style name="ButtonCE" parent="Button">
         <item name="android:text">@string/CE</item>
         <item name="android:maxLines">1</item>
         <item name="android:minLines">1</item>

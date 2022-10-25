@@ -1,54 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="Column">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="Row">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
     <style name="Button" parent="TextAppearance.AppCompat.Button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">5dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minLines">1</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">@color/Linen</item>
         <item name="android:backgroundTint">@color/BlueMunsell</item>
     </style>
-    <style name="ButtonBorderLess" parent="Button">
-        <item name="android:backgroundTint">@color/transparent</item>
-        <item name="android:shadowRadius">0</item>
-        <item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">0</item>
-    </style>
-    <style name="ButtonCancel" parent="ButtonBorderLess">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:text">@string/cancel</item>
-        <item name="android:textColor">@color/BlueMunsell</item>
-    </style>
-    <style name="ButtonSubmit" parent="Button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:text">@string/submit</item>
-    </style>
-    <style name="ButtonPadPortrait" parent="Button">
-        <item name="android:layout_margin">5dp</item>
-    </style>
-    <style name="ButtonNumberPadPortrait" parent="ButtonPadPortrait">
-        <item name="android:textSize">80sp</item>
-    </style>
-    <style name="ButtonComa" parent="ButtonPadPortrait">
-        <item name="android:textSize">85sp</item>
-        <item name="android:text">@string/Coma</item>
-    </style>
-    <style name="ButtonDeleteLast" parent="ButtonPadPortrait">
-        <item name="android:textSize">55sp</item>
-        <item name="android:text">@string/Delete</item>
-    </style>
-    <style name="ButtonCurrency" parent="ButtonPadPortrait">
-        <item name="android:textSize">55sp</item>
-        <item name="android:text">@string/StableCurrency</item>
-    </style>
-    <style name="ButtonCE" parent="ButtonPadPortrait">
-        <item name="android:textSize">75sp</item>
+    <style name="ButtonCE" parent="Button">
         <item name="android:text">@string/CE</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:minLines">2</item>
     </style>
     <style name="TextView" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">0dp</item>
@@ -70,5 +49,43 @@
     </style>
     <style name="EditText" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">wrap_content</item>
+    </style>
+    <style name="TextViewTitleDialog" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:text">@string/set_the_new_currency_details</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/EerieBlack</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="CryptoDetailsDialog" parent="LinearLayoutMWV">
+        <item name="android:background">@color/Linen</item>
+    </style>
+    <style name="EditTextDialog" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:importantForAutofill">no</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:textColor">@color/EerieBlack</item>
+        <item name="android:textColorHint">@color/EerieBlack60</item>
+    </style>
+    <style name="ButtonCancelDialog" parent="Button">
+        <item name="android:backgroundTint">@color/transparent</item>
+        <item name="android:shadowRadius">0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:text">@string/cancel</item>
+        <item name="android:textColor">@color/BlueMunsell</item>
+    </style>
+    <style name="ButtonSubmitDialog" parent="Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:text">@string/submit</item>
     </style>
 </resources>

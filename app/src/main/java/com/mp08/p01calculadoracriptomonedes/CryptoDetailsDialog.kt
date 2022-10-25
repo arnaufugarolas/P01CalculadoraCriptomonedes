@@ -17,12 +17,11 @@ class CryptoDetailsDialog(private val currencyName: String, private val currency
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view: View = inflater.inflate(R.layout.dialog_crypto_details, container, false)
-        view.setBackgroundColor(resources.getColor(R.color.Linen))
-        val btnOk: Button = view.findViewById(R.id.btnAdd)
-        val btnCancel: Button = view.findViewById(R.id.ButtonCancel)
-        val editTextCurrencyName: EditText = view.findViewById(R.id.ETName)
-        val editTextCurrencyValue: EditText = view.findViewById(R.id.ETValue)
-        val textViewTitle: TextView = view.findViewById(R.id.TVTitle)
+        val btnOk: Button = view.findViewById(R.id.ButtonSubmitDialog)
+        val btnCancel: Button = view.findViewById(R.id.ButtonCancelDialog)
+        val editTextCurrencyName: EditText = view.findViewById(R.id.ETNameDialog)
+        val editTextCurrencyValue: EditText = view.findViewById(R.id.ETValueDialog)
+        val textViewTitle: TextView = view.findViewById(R.id.TVTitleDialog)
         val createCurrency: Boolean = currencyName == "null"
 
         if (!createCurrency) {

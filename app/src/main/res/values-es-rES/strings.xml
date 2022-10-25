@@ -12,4 +12,7 @@
     <string name="CryptoModified">La moneda ha sido modificada</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
+    <string name="value_of_the_currency">Value of the currency</string>
+    <string name="name_of_the_currency">Name of the currency</string>
+    <string name="set_the_new_currency_details">Set the new currency details</string>
 </resources>
