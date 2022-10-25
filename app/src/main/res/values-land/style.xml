@@ -1,39 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ButtonCancel" parent="ButtonBorderLess">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textColor">@color/BlueMunsell</item>
-    </style>
-    <style name="ButtonPadPortrait" parent="Button">
-        <item name="android:layout_margin">3dp</item>
-    </style>
-    <style name="ButtonNumberPadPortrait" parent="ButtonPadPortrait">
-        <item name="android:textSize">35sp</item>
-    </style>
-    <style name="ButtonComa" parent="ButtonPadPortrait">
-        <item name="android:textSize">85sp</item>
-        <item name="android:text">@string/Coma</item>
-    </style>
-    <style name="ButtonDeleteLast" parent="ButtonPadPortrait">
-        <item name="android:textSize">55sp</item>
-        <item name="android:text">@string/Delete</item>
-    </style>
-    <style name="ButtonCurrency" parent="ButtonPadPortrait">
-        <item name="android:textSize">55sp</item>
-        <item name="android:text">@string/StableCurrency</item>
-    </style>
     <style name="ButtonCE" parent="ButtonPadPortrait">
-        <item name="android:textSize">40sp</item>
         <item name="android:text">@string/CE</item>
-    </style>
-    <style name="TextView" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:gravity">center_vertical|end</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textColor">@color/EerieBlack</item>
-        <item name="android:background">@color/Linen</item>
+        <item name="android:minLines">1</item>
     </style>
 </resources>
