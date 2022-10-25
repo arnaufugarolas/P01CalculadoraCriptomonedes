@@ -9,193 +9,42 @@
     <androidx.constraintlayout.widget.Guideline
         style="@style/Column"
         android:id="@+id/Col02"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.25" /> <!-- Column 25% -->
 
     <androidx.constraintlayout.widget.Guideline
         style="@style/Column"
         android:id="@+id/Col04"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.50" /> <!-- Column 50% -->
 
     <androidx.constraintlayout.widget.Guideline
         style="@style/Column"
         android:id="@+id/Col06"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.75" /> <!-- Column 75% -->
 
     <androidx.constraintlayout.widget.Guideline
         style="@style/Row"
         android:id="@+id/Row01"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.15" /> <!-- Row 15% -->
 
     <androidx.constraintlayout.widget.Guideline
         style="@style/Row"
         android:id="@+id/Row03"
-        app:layout_constraintGuide_percent="0.30" />
+        app:layout_constraintGuide_percent="0.30" /> <!-- Row 30% -->
 
     <androidx.constraintlayout.widget.Guideline
         style="@style/Row"
         android:id="@+id/Row05"
-        app:layout_constraintGuide_percent="0.475" />
+        app:layout_constraintGuide_percent="0.475" /> <!-- Row 47.5% -->
 
     <androidx.constraintlayout.widget.Guideline
         style="@style/Row"
         android:id="@+id/Row07"
-        app:layout_constraintGuide_percent="0.65" />
+        app:layout_constraintGuide_percent="0.65" /> <!-- Row 65% -->
 
     <androidx.constraintlayout.widget.Guideline
         style="@style/Row"
         android:id="@+id/Row09"
-        app:layout_constraintGuide_percent="0.825" />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber9"
-        android:text="@string/Number9"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row03"
-        app:layout_constraintBottom_toTopOf="@+id/Row05"
-        app:layout_constraintStart_toStartOf="@+id/Col04"
-        app:layout_constraintEnd_toStartOf="@+id/Col06"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber8"
-        android:text="@string/Number8"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row03"
-        app:layout_constraintBottom_toTopOf="@+id/Row05"
-        app:layout_constraintStart_toStartOf="@+id/Col02"
-        app:layout_constraintEnd_toStartOf="@+id/Col04"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber7"
-        android:text="@string/Number7"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row03"
-        app:layout_constraintBottom_toTopOf="@+id/Row05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Col02"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber6"
-        android:text="@string/Number6"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row05"
-        app:layout_constraintBottom_toTopOf="@+id/Row07"
-        app:layout_constraintStart_toStartOf="@+id/Col04"
-        app:layout_constraintEnd_toStartOf="@+id/Col06"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber5"
-        android:text="@string/Number5"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row05"
-        app:layout_constraintBottom_toTopOf="@+id/Row07"
-        app:layout_constraintStart_toStartOf="@+id/Col02"
-        app:layout_constraintEnd_toStartOf="@+id/Col04"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber4"
-        android:text="@string/Number4"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row05"
-        app:layout_constraintBottom_toTopOf="@+id/Row07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Col02"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber3"
-        android:text="@string/Number3"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row07"
-        app:layout_constraintBottom_toTopOf="@+id/Row09"
-        app:layout_constraintStart_toStartOf="@+id/Col04"
-        app:layout_constraintEnd_toStartOf="@+id/Col06"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber2"
-        android:text="@string/Number2"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row07"
-        app:layout_constraintBottom_toTopOf="@+id/Row09"
-        app:layout_constraintStart_toStartOf="@+id/Col02"
-        app:layout_constraintEnd_toStartOf="@+id/Col04"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber1"
-        android:text="@string/Number1"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row07"
-        app:layout_constraintBottom_toTopOf="@+id/Row09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Col02"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonNumber0"
-        android:text="@string/Number0"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row09"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Col04"
-    />
-
-    <Button
-        style="@style/ButtonCE"
-        android:id="@+id/ButtonCE"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/Row07"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/Col06"
-        app:layout_constraintTop_toTopOf="@+id/Row03"
-    />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/BtnComa"
-        android:text="@string/Coma"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row09"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/Col04"
-        app:layout_constraintEnd_toStartOf="@+id/Col06" />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonDeleteLast"
-        android:text="@string/Delete"
-        app:autoSizeMaxTextSize="50sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/Col06"
-        app:layout_constraintTop_toTopOf="@+id/Row07" />
-
-    <Button
-        style="@style/Button"
-        android:id="@+id/ButtonCurrency"
-        android:text="@string/StableCurrency"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="@+id/Row01"
-        app:layout_constraintBottom_toTopOf="@+id/Row03"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintGuide_percent="0.825" />  <!-- Row 82.5% -->
 
     <TextView
         style="@style/TextView"
@@ -204,8 +53,132 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/Row01"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@tools:sample/last_names"
-    />
+        app:layout_constraintEnd_toEndOf="parent" /> <!-- Result -->
 
+    <Button
+        style="@style/ButtonCurrency"
+        android:id="@+id/ButtonCurrency"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row01"
+        app:layout_constraintBottom_toTopOf="@+id/Row03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" /> <!-- Currency -->
+
+    <Button
+        style="@style/ButtonNumber9"
+        android:id="@+id/ButtonNumber9"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row03"
+        app:layout_constraintBottom_toTopOf="@+id/Row05"
+        app:layout_constraintStart_toStartOf="@+id/Col04"
+        app:layout_constraintEnd_toStartOf="@+id/Col06" /> <!-- 9 -->
+
+    <Button
+        style="@style/ButtonNumber8"
+        android:id="@+id/ButtonNumber8"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row03"
+        app:layout_constraintBottom_toTopOf="@+id/Row05"
+        app:layout_constraintStart_toStartOf="@+id/Col02"
+        app:layout_constraintEnd_toStartOf="@+id/Col04" /> <!-- 8 -->
+
+    <Button
+        style="@style/ButtonNumber7"
+        android:id="@+id/ButtonNumber7"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row03"
+        app:layout_constraintBottom_toTopOf="@+id/Row05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Col02" /> <!-- 7 -->
+
+    <Button
+        style="@style/ButtonNumber6"
+        android:id="@+id/ButtonNumber6"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row05"
+        app:layout_constraintBottom_toTopOf="@+id/Row07"
+        app:layout_constraintStart_toStartOf="@+id/Col04"
+        app:layout_constraintEnd_toStartOf="@+id/Col06" /> <!-- 6 -->
+
+    <Button
+        style="@style/ButtonNumber5"
+        android:id="@+id/ButtonNumber5"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row05"
+        app:layout_constraintBottom_toTopOf="@+id/Row07"
+        app:layout_constraintStart_toStartOf="@+id/Col02"
+        app:layout_constraintEnd_toStartOf="@+id/Col04" /> <!-- 5 -->
+
+    <Button
+        style="@style/ButtonNumber4"
+        android:id="@+id/ButtonNumber4"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row05"
+        app:layout_constraintBottom_toTopOf="@+id/Row07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Col02" /> <!-- 4 -->
+
+    <Button
+        style="@style/ButtonNumber3"
+        android:id="@+id/ButtonNumber3"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row07"
+        app:layout_constraintBottom_toTopOf="@+id/Row09"
+        app:layout_constraintStart_toStartOf="@+id/Col04"
+        app:layout_constraintEnd_toStartOf="@+id/Col06" /> <!-- 3 -->
+
+    <Button
+        style="@style/ButtonNumber2"
+        android:id="@+id/ButtonNumber2"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row07"
+        app:layout_constraintBottom_toTopOf="@+id/Row09"
+        app:layout_constraintStart_toStartOf="@+id/Col02"
+        app:layout_constraintEnd_toStartOf="@+id/Col04" /> <!-- 2 -->
+
+    <Button
+        style="@style/ButtonNumber1"
+        android:id="@+id/ButtonNumber1"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row07"
+        app:layout_constraintBottom_toTopOf="@+id/Row09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Col02" /> <!-- 1 -->
+
+    <Button
+        style="@style/ButtonNumber0"
+        android:id="@+id/ButtonNumber0"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row09"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Col04" /> <!-- 0 -->
+
+    <Button
+        style="@style/ButtonComa"
+        android:id="@+id/ButtonComa"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@+id/Row09"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Col04"
+        app:layout_constraintEnd_toStartOf="@+id/Col06" /> <!-- , -->
+
+    <Button
+        style="@style/ButtonCE"
+        android:id="@+id/ButtonCE"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/Row07"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Col06"
+        app:layout_constraintTop_toTopOf="@+id/Row03" /> <!-- CE -->
+
+    <Button
+        style="@style/ButtonDeleteLast"
+        android:id="@+id/ButtonDeleteLast"
+        app:autoSizeMaxTextSize="50sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Col06"
+        app:layout_constraintTop_toTopOf="@+id/Row07" /> <!-- DEL -->
 </androidx.constraintlayout.widget.ConstraintLayout>

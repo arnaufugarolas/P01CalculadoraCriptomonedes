@@ -1,6 +1,7 @@
 package com.mp08.p01calculadoracriptomonedes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -24,9 +25,9 @@ class MainActivity : AppCompatActivity(), CryptoDetailsInterface {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        setContentView(R.layout.activity_main)
         init()
     }
 
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity(), CryptoDetailsInterface {
         findViewById<View>(R.id.ButtonDeleteLast).setOnClickListener {
             deleteLastCharacterOfValue()
         }
-        findViewById<View>(R.id.BtnComa).setOnClickListener {
+        findViewById<View>(R.id.ButtonComa).setOnClickListener {
             if (!value.contains(".")) {
                 addValue(".")
             }
@@ -99,9 +100,9 @@ class MainActivity : AppCompatActivity(), CryptoDetailsInterface {
     }
 
     private fun setValue(newValue: String) {
+        newValue.replace(",", ".")
         value = if (newValue.contains(".")) {
             val parts = newValue.split(".")
-
             if (parts[1].length > 8) {
                 "%.8f".format(newValue.toDouble())
             }
@@ -113,8 +114,8 @@ class MainActivity : AppCompatActivity(), CryptoDetailsInterface {
     }
 
     private fun addValue(newValue: String) {
-        if (value.split(".").size == 2 && value.split(".")[1].length == 8) {
-            return
+        if (value.contains(".")) {
+            if (value.split(".")[1].length >= 8) return
         }
         value = value.plus(newValue)
         showValueOnDisplay()
@@ -151,22 +152,33 @@ class MainActivity : AppCompatActivity(), CryptoDetailsInterface {
     }
 
     private fun exchangeValue(name: String) {
-        if (currenciesValues[currenciesNames.indexOf(name)] == "null") {
+        if (currentCurrency == name) return
+        else if (currenciesValues[currenciesNames.indexOf(name)] == "null") {
             modifyCurrencyDialog(name)
         } else {
-            val currentCurrencyRate =
-                currenciesValues[currenciesNames.indexOf(currentCurrency)].toDouble()
-            val newCurrencyRate = currenciesValues[currenciesNames.indexOf(name)].toDouble()
-            val currentValue = value.toDouble()
+            try {
+                val currentCurrencyRate =
+                    currenciesValues[currenciesNames.indexOf(currentCurrency)].toDouble()
+                val newCurrencyRate = currenciesValues[currenciesNames.indexOf(name)].toDouble()
+                var currentValue = value.toDouble()
 
-            if (name == stableCurrency) {
-                setValue((currentValue * currentCurrencyRate).toString())
-            } else {
-                setValue((currentValue * currentCurrencyRate).toString())
-                setValue((currentValue / newCurrencyRate).toString())
+                if (name == stableCurrency) {
+                    setValue((currentValue * currentCurrencyRate).toString())
+                } else {
+                    currentValue *= currentCurrencyRate
+                    setValue((currentValue / newCurrencyRate).toString())
+                }
+                currentCurrency = name
+                btnCurrency.text = name
+            } catch (e: Exception) {
+                Log.e("Error", e.toString())
+                Snackbar.make(
+                    findViewById(R.id.TVResult),
+                    getString(R.string.ErrorExchange),
+                    Snackbar.LENGTH_SHORT
+                ).setTextColor(getColor(R.color.RubineRed)).show()
             }
-            currentCurrency = name
-            btnCurrency.text = name
+
         }
     }
 
@@ -197,13 +209,13 @@ class MainActivity : AppCompatActivity(), CryptoDetailsInterface {
                 findViewById(R.id.ButtonCurrency),
                 getString(R.string.EmptyName),
                 Snackbar.LENGTH_SHORT
-            ).show()
+            ).setTextColor(getColor(R.color.RubineRed)).show()
         } else if (currenciesNames.contains(name)) {
             Snackbar.make(
                 findViewById(R.id.ButtonCurrency),
                 getString(R.string.CryptoAlreadyExists),
                 Snackbar.LENGTH_SHORT
-            ).show()
+            ).setTextColor(getColor(R.color.RubineRed)).show()
         } else {
             currenciesNames.add(name)
             currenciesValues.add(value)
@@ -222,13 +234,13 @@ class MainActivity : AppCompatActivity(), CryptoDetailsInterface {
                 findViewById(R.id.ButtonCurrency),
                 getString(R.string.EmptyName),
                 Snackbar.LENGTH_SHORT
-            ).show()
+            ).setTextColor(getColor(R.color.RubineRed)).show()
         } else if (!currenciesNames.contains(name)) {
             Snackbar.make(
                 findViewById(R.id.ButtonCurrency),
                 getString(R.string.CryptoDoesntExist),
                 Snackbar.LENGTH_SHORT
-            ).show()
+            ).setTextColor(getColor(R.color.RubineRed)).show()
         } else {
             currenciesValues[currenciesNames.indexOf(name)] = value
             Snackbar.make(
