@@ -1,17 +1,31 @@
 <resources>
-    <string name="app_name">P01 Calculadora criptomonedes</string>
-    <string name="_Number9">9</string>
-    <string name="_Number8">8</string>
-    <string name="_Number7">7</string>
-    <string name="_Number6">6</string>
-    <string name="_Number5">5</string>
-    <string name="_Number4">4</string>
-    <string name="_Number3">3</string>
-    <string name="_Number2">2</string>
-    <string name="_Number1">1</string>
-    <string name="_Number0">0</string>
-    <string name="_CE">CE</string>
-    <string name="_Coma">,</string>
-    <string name="_Delete">⌫</string>
-    <string name="_Currency">Currency</string>
+    <string name="app_name">P01 Cryptocurrency calculator</string>
+    <string name="StableCurrency">USD</string>
+    <string name="AddCurrency">Add new currency</string>
+    <string name="Number9" translatable="false">9</string>
+    <string name="Number8" translatable="false">8</string>
+    <string name="Number7" translatable="false">7</string>
+    <string name="Number6" translatable="false">6</string>
+    <string name="Number5" translatable="false">5</string>
+    <string name="Number4" translatable="false">4</string>
+    <string name="Number3" translatable="false">3</string>
+    <string name="Number2" translatable="false">2</string>
+    <string name="Number1" translatable="false">1</string>
+    <string name="Number0" translatable="false">0</string>
+    <string name="CE" translatable="false">C\nE</string>
+    <string name="Coma" translatable="false">,</string>
+    <string name="Delete" translatable="false">⌫</string>
+    <string name="TitleExchange">Exchange</string>
+    <string name="TitleChangeRate">Set currency rate</string>
+    <string name="CryptoAlreadyExists">This currency already exists</string>
+    <string name="EmptyName">You have to name the currency</string>
+    <string name="CryptoAdded">The currency has been added correctly</string>
+    <string name="CryptoDoesntExist">The currency dosn\'t exist</string>
+    <string name="CryptoModified">The currency has been modified</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="value_of_the_currency">Value of the currency</string>
+    <string name="name_of_the_currency">Name of the currency</string>
+    <string name="set_the_new_currency_details">Set the new currency details</string>
+    <string name="ErrorExchange">Error when doing the conversion operation the values are invalid.</string>
 </resources>

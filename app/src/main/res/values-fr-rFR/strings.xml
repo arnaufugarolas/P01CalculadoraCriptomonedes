@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">P01 Calculateur de crypto-monnaies</string>
+    <string name="StableCurrency">EUR</string>
+    <string name="AddCurrency">Ajouter une nouvelle devise</string>
+    <string name="TitleExchange">Changement de devise</string>
+    <string name="TitleChangeRate">Définir la cotation de la devise</string>
+    <string name="CryptoAlreadyExists">Cette devise existe déjà</string>
+    <string name="EmptyName">Vous devez nommer la devise</string>
+    <string name="CryptoAdded">La devise a été ajoutée correctement</string>
+    <string name="CryptoDoesntExist">La devise n\'existe pas</string>
+    <string name="CryptoModified">La devise a été modifiée</string>
+    <string name="cancel">Annuler</string>
+    <string name="submit">Soumettre</string>
+    <string name="value_of_the_currency">Valeur de la devise</string>
+    <string name="name_of_the_currency">Nom de la devise</string>
+    <string name="set_the_new_currency_details">Définissez les détails de la nouvelle devise</string>
+    <string name="ErrorExchange">Erreur lors de l\'opération de conversion, les valeurs ne sont pas valides.</string>
+</resources>

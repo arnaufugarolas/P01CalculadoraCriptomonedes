@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Calculadora de criptomonedas</string>
+    <string name="StableCurrency">EUR</string>
+    <string name="AddCurrency">Añadir una nueva moneda</string>
+    <string name="TitleExchange">Cambiar de moneda</string>
+    <string name="TitleChangeRate">Establecer cotizacion de la moneda</string>
+    <string name="CryptoAlreadyExists">Esta moneda ya existe</string>
+    <string name="EmptyName">Tienes que ponerle nombre a la moneda</string>
+    <string name="CryptoAdded">La moneda se ha añadido correctamente</string>
+    <string name="CryptoDoesntExist">La moneda no existe</string>
+    <string name="CryptoModified">La moneda ha sido modificada</string>
+    <string name="cancel">Cancelar</string>
+    <string name="submit">Enviar</string>
+    <string name="value_of_the_currency">Valor de la moneda</string>
+    <string name="name_of_the_currency">Nombre de la moneda</string>
+    <string name="set_the_new_currency_details">Set the new currency details</string>
+    <string name="ErrorExchange">Error al realizar la operación de conversión los valores no son válidos.</string>
+</resources>
