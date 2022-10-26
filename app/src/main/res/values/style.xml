@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Column">
+    <style name="GuideLine">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Column" parent="GuideLine">
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="Row">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="Row" parent="GuideLine">
         <item name="android:orientation">horizontal</item>
     </style>
 
@@ -20,6 +21,7 @@
         <item name="android:insetTop">0dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:minLines">1</item>
+        <item name="android:autoSizeTextType">uniform</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">@color/Linen</item>
         <item name="android:backgroundTint">@color/BlueMunsell</item>
@@ -81,6 +83,7 @@
 
     <style name="ButtonDeleteLast" parent="Button">
         <item name="android:text">@string/Delete</item>
+        <item name="android:autoSizeMaxTextSize">65dp</item>
     </style>
 
     <style name="TextView" parent="Widget.AppCompat.TextView">
@@ -88,6 +91,7 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:gravity">center_vertical|end</item>
         <item name="android:maxLines">1</item>
+        <item name="android:autoSizeTextType">uniform</item>
         <item name="android:textColor">@color/EerieBlack</item>
         <item name="android:background">@color/Linen</item>
     </style>

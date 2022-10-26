@@ -49,7 +49,6 @@
     <TextView
         style="@style/TextView"
         android:id="@+id/TVResult"
-        app:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/Row02"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +57,6 @@
     <Button
         style="@style/ButtonCurrency"
         android:id="@+id/ButtonCurrency"
-        app:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="@+id/Row02"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/Col07"
@@ -67,7 +65,6 @@
     <Button
         style="@style/ButtonNumber9"
         android:id="@+id/ButtonNumber9"
-        app:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="@+id/Row02"
         app:layout_constraintBottom_toTopOf="@+id/Row04"
         app:layout_constraintStart_toStartOf="@+id/Col03"
@@ -76,7 +73,6 @@
     <Button
         style="@style/ButtonNumber8"
         android:id="@+id/ButtonNumber8"
-        app:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="@+id/Row02"
         app:layout_constraintBottom_toTopOf="@+id/Row04"
         app:layout_constraintStart_toStartOf="@+id/Col01"
@@ -85,7 +81,6 @@
     <Button
         style="@style/ButtonNumber7"
         android:id="@+id/ButtonNumber7"
-        app:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="@+id/Row02"
         app:layout_constraintBottom_toTopOf="@+id/Row04"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +89,6 @@
     <Button
         style="@style/ButtonNumber6"
         android:id="@+id/ButtonNumber6"
-        app:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="@+id/Row04"
         app:layout_constraintBottom_toTopOf="@+id/Row06"
         app:layout_constraintStart_toStartOf="@+id/Col03"
@@ -103,7 +97,6 @@
     <Button
         style="@style/ButtonNumber5"
         android:id="@+id/ButtonNumber5"
-        app:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="@+id/Row04"
         app:layout_constraintBottom_toTopOf="@+id/Row06"
         app:layout_constraintStart_toStartOf="@+id/Col01"
@@ -112,7 +105,6 @@
     <Button
         style="@style/ButtonNumber4"
         android:id="@+id/ButtonNumber4"
-        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/Row06"
         app:layout_constraintEnd_toStartOf="@+id/Col01"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +113,6 @@
     <Button
         style="@style/ButtonNumber3"
         android:id="@+id/ButtonNumber3"
-        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/Row08"
         app:layout_constraintEnd_toStartOf="@+id/Col05"
         app:layout_constraintStart_toStartOf="@+id/Col03"
@@ -130,7 +121,6 @@
     <Button
         style="@style/ButtonNumber2"
         android:id="@+id/ButtonNumber2"
-        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/Row08"
         app:layout_constraintEnd_toStartOf="@+id/Col03"
         app:layout_constraintStart_toStartOf="@+id/Col01"
@@ -139,7 +129,6 @@
     <Button
         style="@style/ButtonNumber1"
         android:id="@+id/ButtonNumber1"
-        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/Row08"
         app:layout_constraintEnd_toStartOf="@+id/Col01"
         app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +137,6 @@
     <Button
         style="@style/ButtonNumber0"
         android:id="@+id/ButtonNumber0"
-        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Col03"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +145,6 @@
     <Button
         style="@style/ButtonComa"
         android:id="@+id/ButtonComa"
-        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Col05"
         app:layout_constraintStart_toStartOf="@+id/Col03"
@@ -166,7 +153,6 @@
     <Button
         style="@style/ButtonCE"
         android:id="@+id/ButtonCE"
-        app:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="@+id/Row02"
         app:layout_constraintBottom_toTopOf="@+id/Row06"
         app:layout_constraintStart_toStartOf="@+id/Col05"
@@ -175,7 +161,6 @@
     <Button
         style="@style/ButtonDeleteLast"
         android:id="@+id/ButtonDeleteLast"
-        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Col07"
         app:layout_constraintStart_toStartOf="@+id/Col05"
